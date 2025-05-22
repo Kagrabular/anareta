@@ -1,4 +1,4 @@
-// Package v1alpha1 contains API Schema definitions for the ANARETA operator
+// Package v1alpha1 contains API Schema definitions for the anareta operator
 // +kubebuilder:object:generate=true
 // +groupName=anareta.dev
 package v1alpha1

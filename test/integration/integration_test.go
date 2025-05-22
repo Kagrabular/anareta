@@ -17,8 +17,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/envtest"
 
-	anareta "github.com/Kagrabular/ANARETA/api/v1alpha1"
-	controllers "github.com/Kagrabular/ANARETA/controllers" // ide will call this redundant, but one mans redundancy is another mans is a package used in file. don't worry about this.
+	anareta "github.com/Kagrabular/anareta/api/v1alpha1"
+	controllers "github.com/Kagrabular/anareta/controllers" // ide will call this redundant, but one mans redundancy is another mans is a package used in file. don't worry about this.
 )
 
 func TestReconcileCreatesNamespace(t *testing.T) {
