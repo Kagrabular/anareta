@@ -1,0 +1,32 @@
+{{- if .Values.chaos.podKill.enabled }}
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: {{ include "anareta-operator.fullname" . }}-pod-kill
+  namespace: {{ .Release.Namespace }}
+spec:
+  action: pod-failure
+  mode: {{ .Values.chaos.podKill.mode }}
+  selector:
+    {{- toYaml .Values.chaos.podKill.selector | nindent 4 }}
+  schedule: {{ quote .Values.chaos.podKill.schedule }}
+{{- end }}
+
+{{- if .Values.chaos.networkLatency.enabled }}
+---
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: {{ include "anareta-operator.fullname" . }}-network-latency
+  namespace: {{ .Release.Namespace }}
+spec:
+  action: delay
+  mode: all
+  selector:
+    {{- toYaml .Values.chaos.networkLatency.selector | nindent 4 }}
+  delay:
+    latency: {{ .Values.chaos.networkLatency.latency }}
+    jitter:  {{ .Values.chaos.networkLatency.jitter }}
+    correlation: {{ .Values.chaos.networkLatency.correlation }}
+  schedule: {{ quote .Values.chaos.networkLatency.schedule }}
+{{- end }}

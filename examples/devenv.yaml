@@ -1,0 +1,9 @@
+apiVersion: anareta.dev/v1alpha1
+kind: DevEnv
+metadata:
+  name: feature-xyz
+  namespace: anareta-system
+spec:
+  repoURL: https://github.com/Kagrabular/myapp.git
+  branch: feature/xyz
+  ttl: 2m

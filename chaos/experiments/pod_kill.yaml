@@ -1,0 +1,11 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: pod-kill-experiment
+spec:
+  action: pod-failure
+  mode: one             # kill one pod at a time
+  selector:
+    labelSelectors:
+      app: anareta-operator
+  schedule: "@every 30s"

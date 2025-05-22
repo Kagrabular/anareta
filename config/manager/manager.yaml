@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: anareta-operator-controller-manager
+  namespace: default
+  labels:
+    control-plane: controller-manager
+    app.kubernetes.io/name: controller-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+      app.kubernetes.io/name: controller-manager
+  template:
+    metadata:
+      labels:
+        control-plane: controller-manager
+        app.kubernetes.io/name: controller-manager
+    spec:
+      serviceAccountName: anareta-operator
+      containers:
+        - name: manager
+          image: ghcr.io/Kagrabular/ANARETA-operator:0.1.0
+          command:
+            - /manager
+          args:
+            - --metrics-bind-address=0.0.0.0:8080
+            - --health-probe-bind-address=0.0.0.0:9443
+          ports:
+            - containerPort: 8080
+              name: metrics
+            - containerPort: 9443
+              name: health
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9443
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 9443
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "100m"
+              memory: "128Mi"

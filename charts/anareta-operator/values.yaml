@@ -1,0 +1,62 @@
+image:
+  repository: ghcr.io/Kagrabular/anareta-operator
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+serviceAccount:
+
+  create: true
+  # The name of the service account to use; if not set and create=true, a name is generated
+  name: ""
+
+rbac:
+  create: true
+
+#currently no prom/loki integrations, TO-DO
+metrics:
+  enabled: true
+  servicePort: 8080
+  serviceType: ClusterIP
+
+webhook:
+  enabled: false
+  servicePort: 9443
+  serviceType: ClusterIP
+
+
+health:
+  enabled: true
+  servicePort: 9443
+  serviceType: ClusterIP
+
+# Chaos experiment toggles, need to test this
+chaos:
+  podKill:
+    enabled: false
+    mode: one
+    selector:
+      labelSelectors:
+        app: anareta-operator
+    schedule: "@every 30s"
+
+  networkLatency:
+    enabled: false
+    latency: "100ms"
+    jitter: "10ms"
+    correlation: "100"
+    selector:
+      labelSelectors:
+        app: anareta-operator
+    schedule: "@every 1m"
+
+# leaving defaults for now
+resources: {}
+
+# Node selector blank for now, but can be set to a specific node might test later but confirmed via helm lint TO-DO
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

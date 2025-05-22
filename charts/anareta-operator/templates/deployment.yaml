@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+  labels:
+    app: "{{ .Chart.Name }}"
+    release: "{{ .Release.Name }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: "{{ .Chart.Name }}"
+      release: "{{ .Release.Name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Chart.Name }}"
+        release: "{{ .Release.Name }}"
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      containers:
+        - name: controller
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - /manager
+          args:
+            - "--metrics-bind-address=0.0.0.0:{{ .Values.metrics.servicePort }}"
+            - "--health-probe-bind-address=0.0.0.0:{{ .Values.health.servicePort }}"
+          ports:
+            - name: metrics
+              containerPort: {{ .Values.metrics.servicePort }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.health.servicePort }}
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: {{ .Values.health.servicePort }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

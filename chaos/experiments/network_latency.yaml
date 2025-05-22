@@ -1,0 +1,15 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-latency-experiment
+spec:
+  action: delay
+  mode: all             # apply to all matching pods
+  selector:
+    labelSelectors:
+      app: anareta-operator
+  delay:
+    latency: "100ms"
+    jitter:  "10ms"
+    correlation: "100"
+  schedule: "@every 1m"

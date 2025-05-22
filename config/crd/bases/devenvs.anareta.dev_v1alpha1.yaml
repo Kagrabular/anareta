@@ -1,0 +1,59 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: devenvs.anareta.dev
+spec:
+  group: anareta.dev
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - repoURL
+                - branch
+              properties:
+                repoURL:
+                  type: string
+                  description: Git repository to clone for the environment
+                branch:
+                  type: string
+                  description: Branch, tag, or ref to checkout
+                ttl:
+                  type: string
+                  description: Duration before automatic environment cleanup
+            status:
+              type: object
+              properties:
+                phase:
+                  type: string
+                  description: Current phase of the DevEnv (Pending, Ready, Error, CleaningUp)
+                message:
+                  type: string
+                  description: Human-readable status or error message
+                startedAt:
+                  type: string
+                  format: date-time
+                  description: Timestamp when environment provisioning started
+      subresources:
+        status: {}
+      additionalPrinterColumns:
+        - name: Phase
+          type: string
+          jsonPath: .status.phase
+        - name: Age
+          type: date
+          jsonPath: .metadata.creationTimestamp
+  scope: Namespaced
+  names:
+    plural: devenvs
+    singular: devenv
+    kind: DevEnv
+    shortNames:
+      - devenv
+      - devs
