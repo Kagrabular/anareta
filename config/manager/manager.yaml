@@ -21,7 +21,7 @@ spec:
       serviceAccountName: anareta-operator
       containers:
         - name: manager
-          image: ghcr.io/Kagrabular/anareta-operator:0.1.0
+          image: quay.io/kagrabular/anareta-operator:0.1.0 # this image isn't actually published yet TO-DO
           command:
             - /manager
           args:

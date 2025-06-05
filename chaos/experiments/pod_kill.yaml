@@ -9,3 +9,5 @@ spec:
     labelSelectors:
       app: anareta-operator
   schedule: "@every 30s"
+
+#maybe play with  under replicated pods, 

@@ -1,4 +1,4 @@
-FROM golang:1.20 AS builder
+FROM golang:1.24 AS builder
 
 WORKDIR /workspace
 
@@ -8,7 +8,7 @@ RUN go mod download
 COPY . .
 
 # Disable CGO, target Linux, and produce a statically linked executable. don't need clib bindings, so we can be self-contained and static. If for some reason you need CGO you can simply flip this.
-RUN CGO_ENABLED=0 GOOS=linux go build -a -o manager main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -o manager .
 
 FROM gcr.io/distroless/static:nonroot
 

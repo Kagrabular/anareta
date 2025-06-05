@@ -1,0 +1,8 @@
+apiVersion: anareta.dev/v1alpha1
+kind: DevEnv
+metadata:
+  name: feature-abc
+  finalizers: []
+spec:
+  repoURL: "https://github.com/Kagrabular/anareta.git"
+  branch:  "main"
