@@ -14,8 +14,8 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	appv1alpha1 "github.com/Kagrabular/anareta/api/v1alpha1"
-	"github.com/Kagrabular/anareta/webhook"
+	appv1alpha1 "github.com/kagrabular/anareta/api/v1alpha1"
+	"github.com/kagrabular/anareta/webhook"
 )
 
 var (

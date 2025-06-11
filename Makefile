@@ -1,5 +1,5 @@
 BINARY_NAME := manager
-IMG := ghcr.io/Kagrabular/anareta-operator:0.1.0
+IMG := ghcr.io/kagrabular/anareta-operator:0.1.0
 
 all: generate manifests fmt vet test
 
