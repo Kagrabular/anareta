@@ -1,0 +1,21 @@
+{{- if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Release.Name }}-anareta-operator-cr
+rules:
+  # Permissions to manage DevEnv custom resources
+  - apiGroups: ["anareta.dev"]
+    resources: ["devenvs"]
+    verbs: ["*"]
+
+  # Permissions to update DevEnv status
+  - apiGroups: ["anareta.dev"]
+    resources: ["devenvs/status"]
+    verbs: ["get", "update", "patch"]
+
+  # Permissions to manage Namespaces (cluster-scoped)
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list", "watch", "create", "delete"]
+{{- end }}

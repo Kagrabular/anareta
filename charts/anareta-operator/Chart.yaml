@@ -1,0 +1,17 @@
+apiVersion: v2
+name: anareta-operator
+description: A Kubernetes operator that provisions ephemeral development environments with chaos testing
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+keywords:
+  - kubernetes
+  - operator
+  - dev-environment
+  - chaos-engineering
+home: https://github.com/Kagrabular/anareta
+sources:
+  - https://github.com/Kagrabular/anareta
+maintainers:
+  - name: Earl Sterry
+dependencies: []

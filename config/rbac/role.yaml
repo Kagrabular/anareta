@@ -1,0 +1,31 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: anareta-operator-role
+  namespace: anareta-system
+rules:
+  - apiGroups:
+      - anareta.dev
+    resources:
+      - devenvs
+      - devenvs/status
+      - devenvs/finalizers
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete

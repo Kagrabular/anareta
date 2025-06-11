@@ -1,0 +1,44 @@
+package v1alpha1
+
+import (
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
+	ctrl "sigs.k8s.io/controller-runtime"
+	admission "sigs.k8s.io/controller-runtime/pkg/webhook/admission"
+	"time"
+)
+
+// SetupWebhookWithManager sets up webhooks for DevEnv
+func (r *DevEnv) SetupWebhookWithManager(mgr ctrl.Manager) error {
+	return ctrl.NewWebhookManagedBy(mgr).
+		For(r).
+		Complete()
+}
+
+// +kubebuilder:webhook:path=/mutate-anareta-dev-v1alpha1-devenv,mutating=true,failurePolicy=fail,groups=anareta.dev,resources=devenvs,verbs=create;update,versions=v1alpha1,name=mdevenv.kb.dev
+// +kubebuilder:webhook:path=/validate-anareta-dev-v1alpha1-devenv,mutating=false,failurePolicy=fail,groups=anareta.dev,resources=devenvs,verbs=create;update,versions=v1alpha1,name=vdevenv.kb.dev
+
+var _ admission.Defaulter = &DevEnv{}
+var _ admission.Validator = &DevEnv{}
+
+// Default implements admission.Defaulter
+func (r *DevEnv) Default() {
+	if r.Spec.TTL.Duration == 0 {
+		r.Spec.TTL = metav1.Duration{Duration: 2 * time.Hour}
+	}
+}
+
+// ValidateCreate implements admission.Validator
+func (r *DevEnv) ValidateCreate() error {
+	return nil
+}
+
+// ValidateUpdate implements admission.Validator
+func (r *DevEnv) ValidateUpdate(old runtime.Object) error {
+	return nil
+}
+
+// ValidateDelete implements admission.Validator
+func (r *DevEnv) ValidateDelete() error {
+	return nil
+}

@@ -1,0 +1,59 @@
+image:
+  repository: ghcr.io/kagrabular/anareta-operator
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+fullnameOverride: anareta-operator
+
+installCRDs: true
+
+serviceAccount:
+  create: true
+  name: anareta-operator
+
+rbac:
+  create: true
+
+metrics:
+  enabled: true
+  servicePort: 8080
+  serviceType: ClusterIP
+
+webhook:
+  enabled: true
+  servicePort: 9443
+  serviceType: ClusterIP
+
+health:
+  enabled: true
+  servicePort: 9443
+  serviceType: ClusterIP
+
+chaos:
+  podKill:
+    enabled: false
+    mode: one
+    selector:
+      labelSelectors:
+        app: anareta-operator
+    schedule: "@every 30s"
+
+  networkLatency:
+    enabled: false
+    latency: "100ms"
+    jitter: "10ms"
+    correlation: "100"
+    selector:
+      labelSelectors:
+        app: anareta-operator
+    schedule: "@every 1m"
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
