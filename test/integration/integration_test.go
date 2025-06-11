@@ -17,8 +17,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/envtest"
 
-	anareta "github.com/Kagrabular/anareta/api/v1alpha1"
-	controllers "github.com/Kagrabular/anareta/controllers" // ide will call this redundant, but one mans redundancy is another mans is a package used in file. don't worry about this.
+	anareta "github.com/kagrabular/anareta/api/v1alpha1"
+	controllers "github.com/kagrabular/anareta/controllers" // ide will call this redundant, but one mans redundancy is another mans is a package used in file. don't worry about this.
 )
 
 func TestReconcileCreatesNamespace(t *testing.T) {
@@ -62,7 +62,7 @@ func TestReconcileCreatesNamespace(t *testing.T) {
 	dev := &anareta.DevEnv{
 		ObjectMeta: metav1.ObjectMeta{Name: "integ-test", Namespace: "default"},
 		Spec: anareta.DevEnvSpec{
-			RepoURL: "https://github.com/Kagrabular/myapp.git",
+			RepoURL: "https://github.com/kagrabular/myapp.git",
 			Branch:  "main",
 			TTL:     metav1.Duration{Duration: 1 * time.Minute},
 		},

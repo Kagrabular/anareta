@@ -13,8 +13,8 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/client/fake"
 
-	anareta "github.com/Kagrabular/anareta/api/v1alpha1"
-	controllers "github.com/Kagrabular/anareta/controllers"
+	anareta "github.com/kagrabular/anareta/api/v1alpha1"
+	controllers "github.com/kagrabular/anareta/controllers"
 )
 
 func TestContainsRemoveString(t *testing.T) {

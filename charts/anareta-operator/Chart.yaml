@@ -9,9 +9,9 @@ keywords:
   - operator
   - dev-environment
   - chaos-engineering
-home: https://github.com/Kagrabular/anareta
+home: https://github.com/kagrabular/anareta
 sources:
-  - https://github.com/Kagrabular/anareta
+  - https://github.com/kagrabular/anareta
 maintainers:
   - name: Earl Sterry
 dependencies: []

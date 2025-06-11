@@ -4,5 +4,5 @@ metadata:
   name: feature-abc
   finalizers: []
 spec:
-  repoURL: "https://github.com/Kagrabular/anareta.git"
+  repoURL: "https://github.com/kagrabular/anareta.git"
   branch:  "main"
